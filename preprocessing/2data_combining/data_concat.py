@@ -19,6 +19,14 @@ concat_df.columns = [col.lower().strip() for col in concat_df.columns]
 concat_dur = [timer() - stime]
 concat_obs = [concat_df.shape[0]]
 
+prefer_cols_ord = ['vendorid', 'lpep_pickup_datetime', 'lpep_dropoff_datetime',
+                   'pickup_longitude', 'pickup_latitude', 'dropoff_longitude',
+                   'dropoff_latitude', 'pulocationid', 'dolocationid', 'trip_distance',
+                   'trip_type', 'payment_type', 'total_amount', 'fare_amount',
+                   'tip_amount', 'extra', 'tolls_amount', 'improvement_surcharge',
+                   'ehail_fee', 'mta_tax', 'ratecodeid', 'passenger_count',
+                   'store_and_fwd_flag']
+
 for idx, fname in enumerate(csv_fnames[1:]):
     print("\n------")
     print("File {0} of {1}".format(idx + 2, len(csv_fnames)))
@@ -39,8 +47,8 @@ for idx, fname in enumerate(csv_fnames[1:]):
     print("Observations added:", str(curr_df.shape[0]))
     print("------\n")
 
-
+concat_df = concat_df[prefer_cols_ord]
 print("TOTAL TIME OF CONCATENATION: {0:.3f}".format(timer() - stime))
 
 # Write data to .csv
-concat_df.to_csv(dpath + 'tripdata_green_samp', index=False)
+concat_df.to_csv(dpath + 'tripdata_green_samp.csv', index=False)
