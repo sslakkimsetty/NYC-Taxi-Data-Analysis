@@ -1,0 +1,11 @@
+library(lubridate)
+library(tidyverse)
+library(dplyr)
+library(readr)
+data<-read_csv('green_tripdata_2018-01.csv')
+data$lpep_pickup_datetime<-mdy_hm(data$lpep_pickup_datetime)
+data$lpep_dropoff_datetime<-mdy_hm(data$lpep_dropoff_datetime)
+data<-data%>%mutate(dow_drop=weekdays(lpep_dropoff_datetime),dow_pick=weekdays(lpep_pickup_datetime))
+data<-data[!is.na(data$dow_pick),]
+ggplot(data)+geom_bar(mapping=aes(x=hour(lpep_dropoff_datetime)))+facet_wrap(vars(dow_drop))+xlab('Hour of the day')+ggtitle('Count of dropoffs at each hour by day of the week')
+ggplot(data)+geom_bar(mapping=aes(x=hour(lpep_pickup_datetime)))+facet_wrap(vars(dow_pick))+xlab('Hour of the day')+ggtitle('Count of pickups at each hour by day of the week')
