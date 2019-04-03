@@ -79,7 +79,7 @@ for url in relevant_links:
     sample_df.to_csv(os.getcwd() + '/sampled_data/green/' + fname, index=False)
 
     # Remove original file
-    # os.remove('/Users/sai/Downloads/' + fname)
+    os.remove('/Users/sai/Downloads/' + fname)
     print('\nProcessing ' + fname + ' ...DONE')
     print('\n################################\n')
 
