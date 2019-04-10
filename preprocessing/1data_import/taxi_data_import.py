@@ -16,7 +16,7 @@ all_links = soup.find_all(name='a')
 
 # Download filters
 year_ = 2013
-taxi_type_ = 'green'
+taxi_type_ = 'yellow'
 filter_ = taxi_type_ + '_tripdata_' + str(year_)
 
 # No filter: download all
@@ -76,7 +76,7 @@ for url in relevant_links:
     sample_df = csv_data.sample(frac=0.1, random_state=0)
 
     # Write data to .csv
-    sample_df.to_csv(os.getcwd() + '/sampled_data/green/' + fname, index=False)
+    sample_df.to_csv(os.getcwd() + '/sampled_data/' + taxi_type_ + '/' + fname, index=False)
 
     # Remove original file
     os.remove('/Users/sai/Downloads/' + fname)
